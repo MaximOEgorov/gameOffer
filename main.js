@@ -1,8 +1,11 @@
 import {Game} from "./ui/game/game.component.js";
 import {subscribe} from "./data/game.data.js";
+import {Player} from "./sound/player.js";
 
 
-subscribe(renderApp);
+Player();
+
+// subscribe(renderApp);
 
 function renderApp () {
     document.body.innerHTML = "";

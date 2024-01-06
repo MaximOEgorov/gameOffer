@@ -14,7 +14,7 @@ export const data =
             decreaseDeltaInMs: 1900,
             isMuted: true
         },
-        status: OFFER_STATUSES.missed,
+        offerStatus: OFFER_STATUSES.missed,
         coords:
             {
                 current: {
@@ -32,11 +32,14 @@ export const data =
         },
     }
 
-let subscriber = function () {
+let subscribers = []
+
+function notify() {
+    subscribers.forEach(subscriber => subscriber())
 }
 
 export function subscribe(newSubscriber) {
-    subscriber = newSubscriber;
+    subscribers.push(newSubscriber);
 }
 
 let stepIntervalId;
@@ -45,7 +48,7 @@ function runStepInterval() {
     stepIntervalId = setInterval(() => {
         missOffer();
         moveOfferToRandomPosition();
-        subscriber();
+        notify();
     }, data.settings.decreaseDeltaInMs)
 }
 
@@ -64,25 +67,25 @@ function moveOfferToRandomPosition() {
 }
 
 function missOffer() {
-    data.status = OFFER_STATUSES.missed;
+    data.offerStatus = OFFER_STATUSES.missed;
     data.score.missCount++;
     data.coords.previous = {...data.coords.current};
     setTimeout(() => {
-        data.status = OFFER_STATUSES.default;
-        subscriber();
+        data.offerStatus = OFFER_STATUSES.default;
+        notify();
     }, 400);
 }
 
 export function CatchOffer() {
-    data.status = OFFER_STATUSES.caught;
+    data.offerStatus = OFFER_STATUSES.caught;
     data.score.caughtCount++;
     data.coords.previous = {...data.coords.current};
     setTimeout(() => {
-        data.status = OFFER_STATUSES.default;
-        subscriber();
+        data.offerStatus = OFFER_STATUSES.default;
+        notify();
     }, 400);
     moveOfferToRandomPosition();
-    subscriber();
+    notify();
     clearInterval(stepIntervalId);
     runStepInterval();
 }
