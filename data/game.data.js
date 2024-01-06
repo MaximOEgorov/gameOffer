@@ -4,6 +4,14 @@ export const OFFER_STATUSES = {
     caught: 'caught'
 
 }
+
+export const GAME_STATUSES = {
+    default: 'stopped',
+    started: 'started',
+    paused: 'paused',
+    win: 'win',
+    lose: 'lose'
+}
 export const data =
     {
         settings: {
@@ -14,21 +22,23 @@ export const data =
             decreaseDeltaInMs: 1900,
             isMuted: true
         },
-        offerStatus: OFFER_STATUSES.missed,
+        totalTime: 0,
+        offerStatus: OFFER_STATUSES.default,
+        gameStatus: GAME_STATUSES.default,
         coords:
             {
                 current: {
-                    x: 2,
-                    y: 1
+                    x: -9,
+                    y: -9
                 },
                 previous: {
-                    x: 0,
-                    y: 1
+                    x: -9,
+                    y: -9
                 },
             },
         score: {
-            missCount: 1,
-            caughtCount: 1
+            missCount: 0,
+            caughtCount: 0
         },
     }
 
@@ -49,10 +59,12 @@ function runStepInterval() {
         missOffer();
         moveOfferToRandomPosition();
         notify();
+        setWinOrLose();
     }, data.settings.decreaseDeltaInMs)
+    console.log(stepIntervalId)
 }
 
-runStepInterval();
+//runStepInterval();
 
 function moveOfferToRandomPosition() {
     let newX = null;
@@ -68,12 +80,14 @@ function moveOfferToRandomPosition() {
 
 function missOffer() {
     data.offerStatus = OFFER_STATUSES.missed;
-    data.score.missCount++;
+    if (data.coords.previous.x >= 0 && data.coords.previous.y >= 0) {
+        data.score.missCount++;
+    }
     data.coords.previous = {...data.coords.current};
     setTimeout(() => {
         data.offerStatus = OFFER_STATUSES.default;
         notify();
-    }, 400);
+    }, 1000);
 }
 
 export function CatchOffer() {
@@ -83,13 +97,43 @@ export function CatchOffer() {
     setTimeout(() => {
         data.offerStatus = OFFER_STATUSES.default;
         notify();
-    }, 400);
+    }, 1000);
     moveOfferToRandomPosition();
     notify();
     clearInterval(stepIntervalId);
     runStepInterval();
 }
 
+export function ctrlStartStop() {
+    switch (data.gameStatus) {
+        case GAME_STATUSES.default :
+            data.gameStatus = GAME_STATUSES.started;
+            runStepInterval();
+            break;
+        case GAME_STATUSES.started :
+            data.gameStatus = GAME_STATUSES.paused;
+            clearInterval(stepIntervalId);
+            break;
+        case GAME_STATUSES.paused :
+            data.gameStatus = GAME_STATUSES.started;
+            runStepInterval();
+            break;
+    }
+    console.log(data.gameStatus);
+}
+
+function setWinOrLose() {
+    if (data.score.caughtCount >= data.settings.pointsToWin) {
+        clearInterval(stepIntervalId);
+        alert('You win!!!')
+    } else if (data.score.missCount >= data.settings.maximumMisses) {
+        clearInterval(stepIntervalId);
+        alert('You lose!!!')
+    }
+}
+
 function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
 }
+
+window.data = data;
