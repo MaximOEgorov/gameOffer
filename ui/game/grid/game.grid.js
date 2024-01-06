@@ -9,7 +9,7 @@ export function Grid (parentEl) {
         containerElement.appendChild( row)
 
         for (let x =0; x < data.settings.columnsCount; x++) {
-            const cell = Cell (x, y);
+            let cell = Cell (x, y);
             row.appendChild(cell);
         }
     }

@@ -8,24 +8,22 @@ export const data =
     {
         settings: {
             rowsCount: 3,
-            columnsCount: 6,
+            columnsCount: 3,
             pointsToWin: 10,
             maximumMisses: 3,
-            decreaseDeltaInMs: 100,
+            decreaseDeltaInMs: 600,
             isMuted: true
         },
-        status: OFFER_STATUSES.default,
-        rowsCount: 3,
-        columnsCount: 3,
+        status: OFFER_STATUSES.missed,
         coords:
             {
                 current: {
-                    x: 0,
-                    y: 0
+                    x: 2,
+                    y: 1
                 },
                 previous: {
                     x: 0,
-                    y: 0
+                    y: 1
                 },
             },
         score: {
@@ -43,12 +41,11 @@ export function subscribe(newSubscriber) {
 
 setInterval(() => {
     moveOfferToRandomPosition()
-}, 1000)
+}, data.settings.decreaseDeltaInMs)
 
 function moveOfferToRandomPosition() {
     let newX = null;
     let newY = null;
-
     do {
         newX = getRandom(data.settings.columnsCount - 1);
         newY = getRandom(data.settings.rowsCount - 1);
@@ -60,10 +57,10 @@ function moveOfferToRandomPosition() {
     data.coords.current.x = newX;
     data.coords.current.y = newY;
 
-    setTimeout( () => {
+    /*setTimeout( () => {
         data.status = OFFER_STATUSES.default;
         subscriber();
-    }, 200);
+    }, 200);*/
 
     subscriber();
 
