@@ -1,4 +1,5 @@
 import {data} from "../../../data/game.data.js";
+import {Cell} from "./cell.component.js";
 
 export function Grid (parentEl) {
     const containerElement = document.createElement('div')
@@ -8,9 +9,8 @@ export function Grid (parentEl) {
         containerElement.appendChild( row)
 
         for (let x =0; x < data.settings.columnsCount; x++) {
-            const cell = document.createElement('td')
-            cell.append(y + ' - ' + x)
-            row.appendChild(cell)
+            const cell = Cell (x, y);
+            row.appendChild(cell);
         }
     }
 

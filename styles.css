@@ -1,0 +1,16 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    background-color: #204891;
+    color: white;
+}
+
+td {
+    width: 85px;
+    height: 84px;
+    border-radius: 5px;
+    border: 2px solid #54BAE0;
+    background: #4580C4;
+}
+

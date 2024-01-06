@@ -7,8 +7,8 @@ export function Game () {
     const containerElement = document.createElement('div')
 
     Settings(containerElement);
-    Grid(containerElement);
     Scores(containerElement);
+    Grid(containerElement);
 
 
     return containerElement;
