@@ -11,7 +11,7 @@ export const data =
             columnsCount: 3,
             pointsToWin: 10,
             maximumMisses: 3,
-            decreaseDeltaInMs: 600,
+            decreaseDeltaInMs: 1900,
             isMuted: true
         },
         status: OFFER_STATUSES.missed,
@@ -39,9 +39,17 @@ export function subscribe(newSubscriber) {
     subscriber = newSubscriber;
 }
 
-setInterval(() => {
-    moveOfferToRandomPosition()
-}, data.settings.decreaseDeltaInMs)
+let stepIntervalId;
+
+function runStepInterval() {
+    stepIntervalId = setInterval(() => {
+        missOffer();
+        moveOfferToRandomPosition();
+        subscriber();
+    }, data.settings.decreaseDeltaInMs)
+}
+
+runStepInterval();
 
 function moveOfferToRandomPosition() {
     let newX = null;
@@ -51,28 +59,32 @@ function moveOfferToRandomPosition() {
         newY = getRandom(data.settings.rowsCount - 1);
     } while (data.coords.current.x === newX && data.coords.current.y === newY)
 
-    data.status = OFFER_STATUSES.missed;
-    data.coords.previous = {...data.coords.current};
-
     data.coords.current.x = newX;
     data.coords.current.y = newY;
-
-    /*setTimeout( () => {
-        data.status = OFFER_STATUSES.default;
-        subscriber();
-    }, 200);*/
-
-    subscriber();
-
 }
 
-function miss() {
+function missOffer() {
     data.status = OFFER_STATUSES.missed;
     data.score.missCount++;
+    data.coords.previous = {...data.coords.current};
+    setTimeout(() => {
+        data.status = OFFER_STATUSES.default;
+        subscriber();
+    }, 400);
 }
 
 export function CatchOffer() {
-
+    data.status = OFFER_STATUSES.caught;
+    data.score.caughtCount++;
+    data.coords.previous = {...data.coords.current};
+    setTimeout(() => {
+        data.status = OFFER_STATUSES.default;
+        subscriber();
+    }, 400);
+    moveOfferToRandomPosition();
+    subscriber();
+    clearInterval(stepIntervalId);
+    runStepInterval();
 }
 
 function getRandom(N) {

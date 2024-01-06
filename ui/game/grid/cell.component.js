@@ -1,4 +1,4 @@
-import {data, OFFER_STATUSES} from "../../../data/game.data.js";
+import {CatchOffer, data, OFFER_STATUSES} from "../../../data/game.data.js";
 
 export  function Cell(x, y) {
     const cellEl = document.createElement('td')
@@ -6,6 +6,7 @@ export  function Cell(x, y) {
     if (x === data.coords.current.x && y === data.coords.current.y) {
         const offerEl = document.createElement('img');
         offerEl.src = 'assets/images/offer.svg'
+        offerEl.addEventListener('click', CatchOffer)
         cellEl.append(offerEl)
     }
 
