@@ -138,17 +138,17 @@ export function ctrlStartStop() {
 }
 
 function setWinOrLose() {
-        if (data.score.caughtCount === data.settings.pointsToWin) {
-            debugger
-            clearInterval(stepIntervalId);
-            data.gameStatus = GAME_STATUSES.win;
+    if (data.gameStatus === GAME_STATUSES.started && data.score.caughtCount === data.settings.pointsToWin) {
+        debugger
+        clearInterval(stepIntervalId);
+        data.gameStatus = GAME_STATUSES.win;
 //            alert('You win!!!')
-        } else if (data.score.missCount === data.settings.maximumMisses) {
-            debugger
-            clearInterval(stepIntervalId);
-            data.gameStatus = GAME_STATUSES.lose;
+    } else if (data.gameStatus === GAME_STATUSES.started && data.score.missCount === data.settings.maximumMisses) {
+        debugger
+        clearInterval(stepIntervalId);
+        data.gameStatus = GAME_STATUSES.lose;
 //            alert('You lose!!!')
-        }
+    }
 }
 
 // subscribe(setWinOrLose);
@@ -158,10 +158,23 @@ function getRandom(N) {
 }
 
 function clearScore() {
-    data.score = {...data.score,
+    data.score = {
+        ...data.score,
         missCount: 0,
         caughtCount: 0,
     };
+    data.step = 0;
+    data.coords =
+        {
+            current: {
+                x: -9,
+                y: -9
+            },
+            previous: {
+                x: -9,
+                y: -9
+            }
+        }
 }
 
 ////// Далее методы установки настроек игры ///////////////////////////
