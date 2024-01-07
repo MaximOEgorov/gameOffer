@@ -15,8 +15,6 @@ export function setMissesEl(parentEl) {
         optionEl.text = miss;
         return optionEl;
     });
-    console.log(optionsElement);
-    console.log(JSON.stringify(optionsElement));
     selectElement.append(...optionsElement);
     divElement.appendChild(selectElement);
 }

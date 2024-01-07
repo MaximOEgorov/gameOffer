@@ -16,8 +16,6 @@ export function setWinEl(parentEl) {
         optionEl.value = win;
         return optionEl;
     });
-    console.log(optionsElement);
-    console.log(JSON.stringify(optionsElement));
     selectElement.append(...optionsElement);
     divElement.appendChild(selectElement);
 }
