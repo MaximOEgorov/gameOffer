@@ -6,6 +6,7 @@ import {Controls} from "./controls/game.controls.js";
 
 export function Game () {
     const containerElement = document.createElement('div')
+    containerElement.classList.add('main__div');
 
     Settings(containerElement);
     Controls(containerElement);
