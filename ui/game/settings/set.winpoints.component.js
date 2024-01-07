@@ -1,4 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
+import {updatePointsToWin} from "../../../data/game.data.js";
 
 export function setWinEl(parentEl) {
     const divElement = document.createElement('div');
@@ -16,6 +17,11 @@ export function setWinEl(parentEl) {
         optionEl.value = win;
         return optionEl;
     });
+
+    selectElement.addEventListener('change', function () {
+        updatePointsToWin(this.value);
+    })
+
     selectElement.append(...optionsElement);
     divElement.appendChild(selectElement);
 }

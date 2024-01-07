@@ -6,10 +6,7 @@ export function Controls(parentEl) {
     const containerElement = document.createElement('div');
     const startElement = document.createElement('button');
     startElement.append('Start/Pause');
-    startElement.addEventListener('click', () => {
-        console.log('start')
-        ctrlStartStop();
-    })
+    startElement.addEventListener('click', ctrlStartStop);
 
     containerElement.appendChild(startElement);
     parentEl.appendChild(containerElement);

@@ -10,8 +10,8 @@ export function Game () {
 
     Settings(containerElement);
     Controls(containerElement);
-    Grid(containerElement);
     Scores(containerElement);
+    Grid(containerElement);
 
 
     return containerElement;

@@ -4,6 +4,7 @@
     box-sizing: border-box;
     background-color: #204891;
     color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 .main__div {
@@ -21,12 +22,20 @@
     display: flex;
     flex-direction: column;
     width: 300px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
 }
 
 .subsettings p {
     margin-right: 12px;
     margin-left: 12px;
     text-align: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
 }
 
 .subsettings select {
@@ -38,6 +47,35 @@
     border: 1px solid #4FABFF;
     padding-left: 12px;
     padding-right: 12px;
+}
+
+button {
+    margin-top: 60px;
+    display: inline-flex;
+    padding: 12px 36px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 30px;
+    background: #B0C255;
+    /*box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10), 0px 2px 4px 0px rgba(0, 0, 0, 0.06);*/
+}
+
+.score {
+    border-radius: 30px;
+    background: #4580C4;
+    width: 375px;
+    height: 48px;
+    display: inline-flex;
+    padding: 12px 36px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.score p {
+    background: #4580C4;
 }
 
 .grid {
@@ -73,14 +111,3 @@ td img {
     max-width: 100%;
     max-height: 100%;}
 
-button {
-    margin-top: 120px;
-    display: inline-flex;
-    padding: 12px 36px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    border-radius: 30px;
-    background: #B0C255;
-    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.10), 0px 2px 4px 0px rgba(0, 0, 0, 0.06);
-}

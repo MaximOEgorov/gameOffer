@@ -1,4 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
+import {updateMaxMisses, updatePointsToWin} from "../../../data/game.data.js";
 
 export function setMissesEl(parentEl) {
     const divElement = document.createElement('div');
@@ -15,6 +16,11 @@ export function setMissesEl(parentEl) {
         optionEl.text = miss;
         return optionEl;
     });
+
+    selectElement.addEventListener('change', function () {
+        updateMaxMisses(this.value);
+    })
+
     selectElement.append(...optionsElement);
     divElement.appendChild(selectElement);
 }

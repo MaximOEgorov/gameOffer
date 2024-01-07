@@ -20,6 +20,7 @@ export const data =
             pointsToWin: 10,
             maximumMisses: 3,
             decreaseDeltaInMs: 1900,
+            showDeltaInMs: 900,
             isMuted: true
         },
         totalTime: 0,
@@ -87,7 +88,7 @@ function missOffer() {
     setTimeout(() => {
         data.offerStatus = OFFER_STATUSES.default;
         notify();
-    }, 1000);
+    }, data.settings.showDeltaInMs);
 }
 
 export function CatchOffer() {
@@ -97,7 +98,7 @@ export function CatchOffer() {
     setTimeout(() => {
         data.offerStatus = OFFER_STATUSES.default;
         notify();
-    }, 1000);
+    }, data.settings.decreaseDeltaInMs);
     moveOfferToRandomPosition();
     notify();
     clearInterval(stepIntervalId);
@@ -136,8 +137,32 @@ function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
 }
 
-export function updateGridSize (newX, newY) {
+function clearScore() {
+    data.score = {...data.score,
+        missCount: 0,
+        caughtCount: 0,
+    };
+}
+
+////// Далее методы установки настроек игры ///////////////////////////
+
+export function updateGridSize(newX, newY) {
     data.settings = {...data.settings, columnsCount: newX, rowsCount: newY};
     notify();
-    console.log(data);
+}
+
+export function updatePointsToWin(newValue) {
+    data.settings = {...data.settings, pointsToWin: newValue};
+    notify();
+}
+
+export function updateMaxMisses(newValue) {
+    data.settings = {...data.settings, maximumMisses: newValue};
+    notify();
+}
+
+
+export function updateTimes(newDecreaseDeltaInMs, newShowDeltaInMs) {
+    data.settings = {...data.settings, decreaseDeltaInMs: newDecreaseDeltaInMs, showDeltaInMs: newShowDeltaInMs};
+    notify();
 }
