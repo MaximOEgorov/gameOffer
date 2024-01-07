@@ -136,4 +136,8 @@ function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
 }
 
-window.data = data;
+export function updateGridSize (newX, newY) {
+    data.settings = {...data.settings, columnsCount: newX, rowsCount: newY};
+    notify();
+    console.log(data);
+}

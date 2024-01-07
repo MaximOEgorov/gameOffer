@@ -1,4 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
+import {data, updateGridSize} from "../../../data/game.data.js";
 
 export function setGridEl(parentEl) {
     const divElement = document.createElement('div');
@@ -15,6 +16,14 @@ export function setGridEl(parentEl) {
         optionEl.text = size;
         return optionEl;
     });
+
+    selectElement.addEventListener('change', function () {
+        let [x, y] = this.value.split('x');
+        if (Number(x) !== data.settings.columnsCount || Number(y) !== data.settings.rowsCount)  {
+            updateGridSize(Number(x), Number(y));
+        }
+    })
+
     selectElement.append(...optionsElement);
     divElement.appendChild(selectElement);
 }
