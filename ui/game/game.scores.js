@@ -17,5 +17,16 @@ export function Scores (parentEl) {
 
 function updateScore(scoreEl) {
     scoreEl.innerHTML = '';
-    scoreEl.append('Catch: '+data.score.caughtCount+'    Miss:'+data.score.missCount);
+    let spanEl = document.createElement('span');
+    spanEl.append('Catch:');
+    scoreEl.append(spanEl);
+    spanEl = document.createElement('span');
+    spanEl.append(data.score.caughtCount)
+    scoreEl.append(spanEl);
+    spanEl = document.createElement('span');
+    spanEl.append('Miss:');
+    scoreEl.append(spanEl);
+    spanEl = document.createElement('span');
+    spanEl.append(data.score.missCount);
+    scoreEl.append(spanEl);
 }

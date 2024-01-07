@@ -68,14 +68,15 @@ button {
     height: 48px;
     display: inline-flex;
     padding: 12px 36px;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
     margin-bottom: 20px;
 }
 
-.score p {
+.score * {
     background: #4580C4;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: flex-start;
 }
 
 .grid {
