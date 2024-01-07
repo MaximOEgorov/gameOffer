@@ -8,6 +8,40 @@ export const settingsData =
             '7x7',
             '8x8'
         ],
+        winPoints: [
+            20,
+            30,
+            40,
+            60,
+            80,
+            100
+        ],
+        timeSet: [
+            {
+                max: 200,
+                min: 100
+            },
+            {
+                max: 180,
+                min: 80
+            },
+            {
+                max: 150,
+                min: 70
+            },
+            {
+                max: 130,
+                min: 50
+            },
+            {
+                max: 110,
+                min: 30
+            },
+            {
+                max: 100,
+                min: 10
+            }
+        ],
         maxMisses: [
             3,
             5,
@@ -15,5 +49,6 @@ export const settingsData =
             9,
             11,
             13
-        ]
+        ],
+        muteMode: false
     }
