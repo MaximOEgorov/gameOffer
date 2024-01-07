@@ -17,13 +17,14 @@ export const data =
         settings: {
             rowsCount: 3,
             columnsCount: 3,
-            pointsToWin: 10,
+            pointsToWin: 20,
             maximumMisses: 3,
             decreaseDeltaInMs: 1900,
             showDeltaInMs: 900,
             isMuted: true
         },
         totalTime: 0,
+        step: 0,
         offerStatus: OFFER_STATUSES.default,
         gameStatus: GAME_STATUSES.default,
         coords:
@@ -46,7 +47,11 @@ export const data =
 let subscribers = []
 
 function notify() {
-    subscribers.forEach(subscriber => subscriber())
+    subscribers.forEach(subscriber => {
+        subscriber();
+//        console.log(subscriber)
+    })
+    setWinOrLose();
 }
 
 export function subscribe(newSubscriber) {
@@ -60,7 +65,6 @@ function runStepInterval() {
         missOffer();
         moveOfferToRandomPosition();
         notify();
-        setWinOrLose();
     }, data.settings.decreaseDeltaInMs)
     console.log(stepIntervalId)
 }
@@ -77,11 +81,12 @@ function moveOfferToRandomPosition() {
 
     data.coords.current.x = newX;
     data.coords.current.y = newY;
+    data.step++;
 }
 
 function missOffer() {
-    data.offerStatus = OFFER_STATUSES.missed;
-    if (data.coords.previous.x >= 0 && data.coords.previous.y >= 0) {
+    if (data.step > 0) {
+        data.offerStatus = OFFER_STATUSES.missed;
         data.score.missCount++;
     }
     data.coords.previous = {...data.coords.current};
@@ -119,19 +124,34 @@ export function ctrlStartStop() {
             data.gameStatus = GAME_STATUSES.started;
             runStepInterval();
             break;
+        case GAME_STATUSES.win :
+            data.gameStatus = GAME_STATUSES.started;
+            clearScore();
+            runStepInterval();
+            break;
+        case GAME_STATUSES.lose :
+            data.gameStatus = GAME_STATUSES.started;
+            clearScore();
+            runStepInterval();
+            break;
     }
-    console.log(data.gameStatus);
 }
 
 function setWinOrLose() {
-    if (data.score.caughtCount >= data.settings.pointsToWin) {
-        clearInterval(stepIntervalId);
-        alert('You win!!!')
-    } else if (data.score.missCount >= data.settings.maximumMisses) {
-        clearInterval(stepIntervalId);
-        alert('You lose!!!')
-    }
+        if (data.score.caughtCount === data.settings.pointsToWin) {
+            debugger
+            clearInterval(stepIntervalId);
+            data.gameStatus = GAME_STATUSES.win;
+//            alert('You win!!!')
+        } else if (data.score.missCount === data.settings.maximumMisses) {
+            debugger
+            clearInterval(stepIntervalId);
+            data.gameStatus = GAME_STATUSES.lose;
+//            alert('You lose!!!')
+        }
 }
+
+// subscribe(setWinOrLose);
 
 function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
@@ -166,3 +186,5 @@ export function updateTimes(newDecreaseDeltaInMs, newShowDeltaInMs) {
     data.settings = {...data.settings, decreaseDeltaInMs: newDecreaseDeltaInMs, showDeltaInMs: newShowDeltaInMs};
     notify();
 }
+
+window.data = data;
