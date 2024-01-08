@@ -1,6 +1,8 @@
 
 export function Win(parentEl) {
     const containerElement = document.createElement('div');
+    containerElement.classList.add('win')
+    containerElement.classList.add('display__none')
     containerElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="427" viewBox="0 -100 300 527" y="400" fill="none">\n' +
         '    <g filter="url(#filter0_d_22_4735)">\n' +
         '        <path fill-rule="evenodd" clip-rule="evenodd"\n' +
