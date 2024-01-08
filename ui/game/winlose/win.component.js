@@ -193,6 +193,12 @@ export function Win(parentEl) {
         '            </defs>\n' +
         '        </svg>\n' +
         '    </svg>\n' +
+        '<foreignObject x="10" y="106" width="280" height="48">\n' +
+        '    <p xmlns="http://www.w3.org/1999/xhtml" style="border: none;outline: none;font-family:Roboto;font-weight: 600;\n' +
+        '   font-size: 48px;line-height: 1em;padding:0;margin:0;background-color: white;color: #3676BC;text-align:center">You WIN!</p></foreignObject>\n' +
+        '   <foreignObject x="10" y="156" width="280" height="24">\n' +
+        '   <p xmlns="http://www.w3.org/1999/xhtml" style="border: none;outline: none;font-family:Roboto;font-weight: 400;\n' +
+        '   font-size: 18px;line-height: 24px;padding:0;margin:0;background-color: white;color: #3676BC;text-align:center">Congratulations!</p></foreignObject>\n' +
         '</svg>'
 
     parentEl.appendChild(containerElement);
