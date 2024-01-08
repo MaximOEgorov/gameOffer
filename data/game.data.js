@@ -139,15 +139,17 @@ export function ctrlStartStop() {
 
 function setWinOrLose() {
     if (data.gameStatus === GAME_STATUSES.started && data.score.caughtCount === data.settings.pointsToWin) {
-        debugger
+ //       debugger
         clearInterval(stepIntervalId);
         data.gameStatus = GAME_STATUSES.win;
 //            alert('You win!!!')
     } else if (data.gameStatus === GAME_STATUSES.started && data.score.missCount === data.settings.maximumMisses) {
-        debugger
+//        debugger
         clearInterval(stepIntervalId);
         data.gameStatus = GAME_STATUSES.lose;
 //            alert('You lose!!!')
+    } else if (data.gameStatus === GAME_STATUSES.win || data.gameStatus === GAME_STATUSES.lose) {
+        clearInterval(stepIntervalId);
     }
 }
 
@@ -185,12 +187,12 @@ export function updateGridSize(newX, newY) {
 }
 
 export function updatePointsToWin(newValue) {
-    data.settings = {...data.settings, pointsToWin: newValue};
+    data.settings = {...data.settings, pointsToWin: Number(newValue)};
     notify();
 }
 
 export function updateMaxMisses(newValue) {
-    data.settings = {...data.settings, maximumMisses: newValue};
+    data.settings = {...data.settings, maximumMisses: Number(newValue)};
     notify();
 }
 
