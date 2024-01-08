@@ -2,6 +2,7 @@ import {Settings} from "./game.settings.js";
 import {Grid} from "./grid/grid.component.js";
 import {Scores} from "./game.scores.js";
 import {Controls} from "./controls/game.controls.js";
+import {Win} from "./winlose/win.component.js";
 
 
 export function Game () {
@@ -12,6 +13,7 @@ export function Game () {
     Controls(containerElement);
     Scores(containerElement);
     Grid(containerElement);
+    Win(containerElement);
 
 
     return containerElement;
