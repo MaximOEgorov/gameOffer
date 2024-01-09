@@ -3,6 +3,7 @@ import {Grid} from "./grid/grid.component.js";
 import {Scores} from "./game.scores.js";
 import {Controls} from "./controls/game.controls.js";
 import {Win} from "./winlose/win.component.js";
+import {Lose} from "./winlose/lose.component.js";
 
 
 export function Game () {
@@ -14,6 +15,7 @@ export function Game () {
     Scores(containerElement);
     Grid(containerElement);
     Win(containerElement);
+    Lose(containerElement);
 
 
     return containerElement;

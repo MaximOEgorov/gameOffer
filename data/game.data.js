@@ -159,6 +159,12 @@ function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
 }
 
+export function clearWinLose () {
+    if (data.gameStatus !== GAME_STATUSES.default) {
+        data.gameStatus = GAME_STATUSES.default;
+    }
+}
+
 function clearScore() {
     data.score = {
         ...data.score,

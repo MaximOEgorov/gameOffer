@@ -1,5 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
-import {data, updateGridSize} from "../../../data/game.data.js";
+import {clearWinLose, data, updateGridSize} from "../../../data/game.data.js";
 
 export function setGridEl(parentEl) {
     const divElement = document.createElement('div');
@@ -20,6 +20,7 @@ export function setGridEl(parentEl) {
     selectElement.addEventListener('change', function () {
         let [x, y] = this.value.split('x');
         if (Number(x) !== data.settings.columnsCount || Number(y) !== data.settings.rowsCount)  {
+            clearWinLose();
             updateGridSize(Number(x), Number(y));
         }
     })
