@@ -1,5 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
-import {clearWinLose, data, updateGridSize} from "../../../data/game.data.js";
+import {updateGridSize} from "../../../data/game.data.js";
 
 export function setGridEl(parentEl) {
     const divElement = document.createElement('div');
@@ -11,18 +11,20 @@ export function setGridEl(parentEl) {
     divElement.appendChild(pElement);
 
     const selectElement = document.createElement('select');
-    const optionsElement = settingsData.gridSize.map(function (size)  {
+    const optionsElement = settingsData.gridSize2.map(function (size, index)  {
         const optionEl = document.createElement('option');
-        optionEl.text = size;
+        optionEl.text = `${size.w} x ${size.h}`;
+        optionEl.value = index;
         return optionEl;
     });
 
-    selectElement.addEventListener('change', function () {
-        let [x, y] = this.value.split('x');
-        if (Number(x) !== data.settings.columnsCount || Number(y) !== data.settings.rowsCount)  {
-            clearWinLose();
-            updateGridSize(Number(x), Number(y));
-        }
+    selectElement.addEventListener('change', function (e) {
+        let selectedIndex = e.currentTarget.value;
+        const size = settingsData.gridSize2[selectedIndex];
+
+        updateGridSize(size.w, size.h);
+
+
     })
 
     selectElement.append(...optionsElement);

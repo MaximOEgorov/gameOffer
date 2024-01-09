@@ -8,6 +8,11 @@ export const settingsData =
             '7x7',
             '8x8'
         ],
+        gridSize2: [
+            {h:3,w:2},
+            {h:5,w:4},
+            {h:6,w:6},
+        ],
         winPoints: [
             20,
             30,

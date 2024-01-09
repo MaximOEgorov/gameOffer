@@ -12,18 +12,19 @@ export const GAME_STATUSES = {
     win: 'win',
     lose: 'lose'
 }
-export const data =
+export let data =
     {
         settings: {
             rowsCount: 3,
             columnsCount: 3,
             pointsToWin: 20,
             maximumMisses: 3,
-            decreaseDeltaInMs: 1900,
+            decreaseDeltaInMs: 100,
             showDeltaInMs: 900,
             isMuted: true
         },
         totalTime: 0,
+        stepTimeoutInMs: 2000,
         step: 0,
         offerStatus: OFFER_STATUSES.default,
         gameStatus: GAME_STATUSES.default,
@@ -65,7 +66,7 @@ function runStepInterval() {
         missOffer();
         moveOfferToRandomPosition();
         notify();
-    }, data.settings.decreaseDeltaInMs)
+    }, data.stepTimeoutInMs)
     console.log(stepIntervalId)
 }
 
@@ -100,10 +101,11 @@ export function CatchOffer() {
     data.offerStatus = OFFER_STATUSES.caught;
     data.score.caughtCount++;
     data.coords.previous = {...data.coords.current};
+    data.stepTimeoutInMs -= data.settings.decreaseDeltaInMs;
     setTimeout(() => {
         data.offerStatus = OFFER_STATUSES.default;
         notify();
-    }, data.settings.decreaseDeltaInMs);
+    }, data.stepTimeoutInMs);
     moveOfferToRandomPosition();
     notify();
     clearInterval(stepIntervalId);
@@ -159,21 +161,23 @@ function getRandom(N) {
     return Math.floor((Math.random() * (N + 1)));
 }
 
-export function clearWinLose () {
+function clearWinLose () {
     if (data.gameStatus !== GAME_STATUSES.default) {
         data.gameStatus = GAME_STATUSES.default;
     }
 }
 
 function clearScore() {
-    data.score = {
-        ...data.score,
-        missCount: 0,
-        caughtCount: 0,
-    };
-    data.step = 0;
-    data.coords =
-        {
+
+    data = {
+        ...data,
+        score: {
+            ...data.score,
+            missCount: 0,
+            caughtCount: 0,
+        },
+        step: 0,
+        coords: {
             current: {
                 x: -9,
                 y: -9
@@ -183,13 +187,17 @@ function clearScore() {
                 y: -9
             }
         }
+    }
 }
 
 ////// Далее методы установки настроек игры ///////////////////////////
 
 export function updateGridSize(newX, newY) {
-    data.settings = {...data.settings, columnsCount: newX, rowsCount: newY};
-    notify();
+    if (newX !== data.settings.columnsCount || newY !== data.settings.rowsCount)  {
+        data.settings = {...data.settings, columnsCount: newX, rowsCount: newY};
+        clearWinLose();
+        notify();
+    }
 }
 
 export function updatePointsToWin(newValue) {

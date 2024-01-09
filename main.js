@@ -1,5 +1,4 @@
 import {Game} from "./ui/game/game.component.js";
-import {subscribe} from "./data/game.data.js";
 import {Player} from "./sound/player.js";
 
 
