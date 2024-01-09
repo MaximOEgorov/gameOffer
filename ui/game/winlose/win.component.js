@@ -1,9 +1,33 @@
+import {data, GAME_STATUSES, subscribe} from "../../../data/game.data.js";
+
+const class_display_none = 'display__none';
 
 export function Win(parentEl) {
+    subscribe(() => {
+        updateWin(containerElement);
+    })
+
     const containerElement = document.createElement('div');
-    containerElement.classList.add('win')
-    containerElement.classList.add('display__none')
-    containerElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="427" viewBox="0 -100 300 527" y="400" fill="none">\n' +
+    containerElement.classList.add('win');
+    updateWin(containerElement);
+    containerElement.innerHTML = svgEl();
+    parentEl.appendChild(containerElement);
+}
+
+function updateWin(containerElement) {
+    if (data.gameStatus === GAME_STATUSES.win) {
+        if (containerElement.classList.contains([class_display_none])) {
+            containerElement.classList.remove([class_display_none]);
+        }
+    } else {
+        if (!containerElement.classList.contains([class_display_none])) {
+            containerElement.classList.add(class_display_none)
+        }
+    }
+}
+
+function svgEl() {
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="427" viewBox="0 -100 300 527" y="400" fill="none">\n' +
         '    <g filter="url(#filter0_d_22_4735)">\n' +
         '        <path fill-rule="evenodd" clip-rule="evenodd"\n' +
         '              d="M76.6047 15.4657C75.0482 11.1502 71.1125 8 66.5249 8H20C14.4771 8 10 12.4771 10 18V405C10 410.523 14.4771 415 20 415H280C285.523 415 290 410.523 290 405V18C290 12.4772 285.523 8 280 8H233.475C228.887 8 224.952 11.1502 223.395 15.4657C212.557 45.5172 183.787 67 150 67C116.213 67 87.4428 45.5172 76.6047 15.4657Z"\n' +
@@ -201,7 +225,5 @@ export function Win(parentEl) {
         '   <foreignObject x="10" y="156" width="280" height="24">\n' +
         '   <p xmlns="http://www.w3.org/1999/xhtml" style="border: none;outline: none;font-family:Roboto;font-weight: 400;\n' +
         '   font-size: 18px;line-height: 24px;padding:0;margin:0;background-color: white;color: #3676BC;text-align:center">Congratulations!</p></foreignObject>\n' +
-        '</svg>'
-
-    parentEl.appendChild(containerElement);
+        '</svg>';
 }
