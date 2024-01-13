@@ -5,12 +5,12 @@ export function Player() {
 
     let prevStatus = data.offerStatus;
     subscribe(() => {
-        if (data.offerStatus === OFFER_STATUSES.caught && prevStatus !== OFFER_STATUSES.caught) {
+        if (data.offerStatus === OFFER_STATUSES.caught && prevStatus !== OFFER_STATUSES.caught && !data.settings.isMuted) {
             catchAudio.src = 'assets/sounds/catch.wav';
             catchAudio.currentTime = 0;
             catchAudio.play()
         }
-        if (data.offerStatus === OFFER_STATUSES.missed && prevStatus !== OFFER_STATUSES.missed) {
+        if (data.offerStatus === OFFER_STATUSES.missed && prevStatus !== OFFER_STATUSES.missed && !data.settings.isMuted) {
             catchAudio.src = 'assets/sounds/miss.mp3';
             catchAudio.currentTime = 0;
             catchAudio.play()

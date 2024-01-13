@@ -216,4 +216,12 @@ export function updateTimes(newDecreaseDeltaInMs, newShowDeltaInMs) {
     notify();
 }
 
+export function toggleMute() {
+    data.settings.isMuted = !data.settings.isMuted;
+}
+
+export function selectMuteMode() {
+    return data.settings.isMuted;
+}
+
 window.data = data;

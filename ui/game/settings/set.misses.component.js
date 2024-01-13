@@ -1,5 +1,5 @@
 import {settingsData} from "../../../data/settings.data.js";
-import {updateMaxMisses, updatePointsToWin} from "../../../data/game.data.js";
+import {updateMaxMisses} from "../../../data/game.data.js";
 
 export function setMissesEl(parentEl) {
     const divElement = document.createElement('div');

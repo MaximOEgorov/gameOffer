@@ -1,4 +1,4 @@
-import {settingsData} from "../../../data/settings.data.js";
+import {selectMuteMode, toggleMute} from "../../../data/game.data.js";
 
 export function setMuteEl(parentEl) {
     const divElement = document.createElement('div');
@@ -9,12 +9,18 @@ export function setMuteEl(parentEl) {
     pElement.append('Mute mode');
     divElement.appendChild(pElement);
 
-    const inputElement = document.createElement('input');
-    inputElement.classList.add('switch')
-    inputElement.type = 'checkbox'
-    inputElement.checked = settingsData.muteMode;
-    const spanElement =document.createElement('span');
-    spanElement.classList.add('toggle');
-    divElement.appendChild(inputElement);
-    divElement.appendChild(spanElement);
+    const labelElement = document.createElement('label');
+    labelElement.classList.add('switch')
+    divElement.appendChild(labelElement)
+
+    const chkElement = document.createElement('input');
+    chkElement.type = 'checkbox';
+    chkElement.checked = selectMuteMode();
+    labelElement.appendChild(chkElement);
+
+    const spanElement = document.createElement('span');
+    spanElement.classList.add('slider');
+    spanElement.addEventListener('click', toggleMute);
+    labelElement.appendChild(spanElement)
+
 }
