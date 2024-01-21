@@ -1,5 +1,5 @@
-import {settingsData} from "../../../data/settings.data.js";
-import {updateGridSize} from "../../../data/game.data.js";
+import {settingsData} from "../../../../data/settings.data.js";
+import {updateGridSize} from "../../../../data/game.data.js";
 
 export function setGridEl(parentEl) {
     const divElement = document.createElement('div');
@@ -11,7 +11,7 @@ export function setGridEl(parentEl) {
     divElement.appendChild(pElement);
 
     const selectElement = document.createElement('select');
-    const optionsElement = settingsData.gridSize2.map(function (size, index)  {
+    const optionsElement = settingsData.gridSize.map(function (size, index)  {
         const optionEl = document.createElement('option');
         optionEl.text = `${size.w} x ${size.h}`;
         optionEl.value = index;
@@ -20,10 +20,9 @@ export function setGridEl(parentEl) {
 
     selectElement.addEventListener('change', function (e) {
         let selectedIndex = e.currentTarget.value;
-        const size = settingsData.gridSize2[selectedIndex];
+        const size = settingsData.gridSize[selectedIndex];
 
         updateGridSize(size.w, size.h);
-
 
     })
 

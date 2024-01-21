@@ -1,5 +1,5 @@
-import {settingsData} from "../../../data/settings.data.js";
-import {data, updateGridSize, updateTimes} from "../../../data/game.data.js";
+import {settingsData} from "../../../../data/settings.data.js";
+import {data, updateGridSize, updateTimes} from "../../../../data/game.data.js";
 
 export function setTimesEl(parentEl) {
     const divElement = document.createElement('div');

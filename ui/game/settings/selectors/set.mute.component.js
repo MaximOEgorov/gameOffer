@@ -1,4 +1,4 @@
-import {selectMuteMode, toggleMute} from "../../../data/game.data.js";
+import {selectMuteMode, toggleMute} from "../../../../data/game.data.js";
 
 export function setMuteEl(parentEl) {
     const divElement = document.createElement('div');

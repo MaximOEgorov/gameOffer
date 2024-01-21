@@ -1,8 +1,8 @@
-import {setGridEl} from "./settings/set.grid.component.js";
-import {setMissesEl} from "./settings/set.misses.component.js";
-import {setWinEl} from "./settings/set.winpoints.component.js";
-import {setTimesEl} from "./settings/set.times.component.js";
-import {setMuteEl} from "./settings/set.mute.component.js";
+import {setGridEl} from "./settings/selectors/set.grid.component.js";
+import {setMissesEl} from "./settings/selectors/set.misses.component.js";
+import {setWinEl} from "./settings/selectors/set.winpoints.component.js";
+import {setTimesEl} from "./settings/selectors/set.times.component.js";
+import {setMuteEl} from "./settings/selectors/set.mute.component.js";
 
 export function Settings(parentEl) {
     const containerElement = document.createElement('div');

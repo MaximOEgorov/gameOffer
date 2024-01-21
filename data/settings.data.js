@@ -1,25 +1,23 @@
 export const settingsData =
     {
         gridSize: [
-            '3x3',
-            '4x4',
-            '5x5',
-            '6x6',
-            '7x7',
-            '8x8'
-        ],
-        gridSize2: [
             {h:3,w:2},
+            {h:3,w:3},
+            {h:4,w:4},
             {h:5,w:4},
+            {h:5,w:5},
+            {h:6,w:5},
             {h:6,w:6},
+            {h:7,w:7},
+            {h:8,w:8},
         ],
         winPoints: [
-            20,
-            30,
-            40,
-            60,
-            80,
-            100
+            {data:20, name:'20 pts'},
+            {data:30, name:'30 pts'},
+            {data:40, name:'40 pts'},
+            {data:60, name:'60 pts'},
+            {data:80, name:'80 pts'},
+            {data:100, name:'100 pts'}
         ],
         timeSet: [
             {
@@ -48,12 +46,12 @@ export const settingsData =
             }
         ],
         maxMisses: [
-            3,
-            5,
-            7,
-            9,
-            11,
-            13
+            {data:3, name:'3 pts'},
+            {data:5, name:'5 pts'},
+            {data:7, name:'7 pts'},
+            {data:9, name:'9 pts'},
+            {data:11, name:'11 pts'},
+            {data:13, name:'13 pts'}
         ],
         muteMode: false
     }
