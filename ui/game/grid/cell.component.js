@@ -23,6 +23,7 @@ function updateCell(x, y, cellEl) {
         if (data.offerStatus === OFFER_STATUSES.missed && x === data.coords.previous.x && y === data.coords.previous.y) {
             const offerEl = document.createElement('img');
             offerEl.src = 'assets/images/missed.svg';
+            offerEl.classList.add('miss__offer');
             cellEl.append(offerEl)
         }
 
